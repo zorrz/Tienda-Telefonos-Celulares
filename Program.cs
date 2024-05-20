@@ -14,11 +14,7 @@ namespace Tienda_Telefonos_Celulares
             Menuuuu_Independiente.count = 2;
 
             Menuuuu_Independiente.ValidarOpcion();
-
-           
         }
-
-       
 
     }
 
