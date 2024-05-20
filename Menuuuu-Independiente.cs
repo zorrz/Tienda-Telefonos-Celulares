@@ -13,7 +13,8 @@ namespace Tienda_Telefonos_Celulares
         
         public static void MostrarMenu()
         {
-            Console.WriteLine("\nMenu:" + "\n1. Registrar telefono" + "\n2. Mostrar telefonos registrados" + "\n3. Consultar stock de un telefono" +
+            Console.WriteLine("\nMenu:" + "\n1. Registrar telefono" + "\n2. Mostrar telefonos registrados" + 
+                "\n3. Consultar stock de un telefono" +
                  "\n4. Salir" + "\n\nSeleccione una opcion:");
         }
         public static void ValidarOpcion()
@@ -106,12 +107,13 @@ namespace Tienda_Telefonos_Celulares
                 Console.WriteLine("\n--No se han ingresado telefonos--");
                 return;
             }
+            int itemTelefono =0;
             foreach (Telefono telefono in TelefonoINV)
             {
                 
                 if (telefono != null)
                 {
-                    Console.WriteLine($"---INVENTARIO---");
+                    Console.WriteLine($"---Telefono #{itemTelefono}---");
 
                     if (telefono is Telefono_Basicos)
                     {
@@ -120,7 +122,9 @@ namespace Tienda_Telefonos_Celulares
                     else if (telefono is Telefono_Inteligente)
                     {
                         ((Telefono_Inteligente)telefono).MostrarInformacionInteligente();
+                        Console.WriteLine();
                     }
+                    itemTelefono++;
                 }
             }
         }
