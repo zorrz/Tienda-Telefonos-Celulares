@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +43,8 @@ namespace Tienda_Telefonos_Celulares
 
                     case "4":
                         Console.WriteLine("----Saliendo del programa----");
-                        return;
+                        Environment.Exit(0);
+                        break;
 
                     default:
                         Console.WriteLine("\n--Error, Seleccione una opcion--");
@@ -56,52 +57,81 @@ namespace Tienda_Telefonos_Celulares
         }
 
         public static void RegistrarTelefono()
-        {if (count < TelefonoINV.Length) {
+        {
+            if (count < TelefonoINV.Length)
+            {
 
                 int TipoDeTelefono = ValidarEntero("\nSeleccione el tipo de telefono a registrar:"
                     + "\n1.Telefono Basico"
                     + "\n2.Telefono Inteligente\n");
-                
-
-                Console.WriteLine($"---Inserte los siguientes datos del Telefono a registrar---\n");
-                string Marca= ValidarString("Marca:");
-                string Modelo = ValidarString("Modelo:");
-                decimal Precio = ValidarDecimal("Precio:");
-                int Stock = ValidarEntero("Stock:");
 
                 switch (TipoDeTelefono)
                 {
+
                     case 1:
+                        Console.WriteLine($"---Inserte los siguientes datos del Telefono a registrar---\n");
+                        string Marca = ValidarString("Marca:");
+                        string Modelo = ValidarString("Modelo:");
+                        decimal Precio = ValidarDecimal("Precio:");
+                        int Stock = ValidarEntero("Stock:");
+
                         bool TieneRadioFM = ValidarBool("El telefono tiene radio FM? (si/no):");
-                        
+
                         bool TieneLinterna = ValidarBool("El telefono tiene linterna? (si/no):");
 
-                        TelefonoINV[count]= new Telefono_Basicos(Marca, Modelo,Precio,Stock,TieneLinterna,TieneRadioFM);
+                        TelefonoINV[count] = new Telefono_Basicos(Marca, Modelo, Precio, Stock, TieneLinterna, TieneRadioFM);
                         Console.WriteLine($"\n----Telefono Basico Registrado Exitosamente----");
+
+                        count++;
                         break;
 
                     case 2:
+                        Console.WriteLine($"---Inserte los siguientes datos del Telefono a registrar---\n");
+                        string Marca2 = ValidarString("Marca:");
+                        string Modelo2 = ValidarString("Modelo:");
+                        decimal Precio2 = ValidarDecimal("Precio:");
+                        int Stock2 = ValidarEntero("Stock:");
+
                         string Sistemaoperativo = ValidarString("Ingrese el sistema operativo:");
                         int MemoriaRAM = ValidarEntero("Memoria RAM en GB: ");
 
-                        TelefonoINV[count] = new Telefono_Inteligente(Marca, Modelo, Precio, Stock, Sistemaoperativo,MemoriaRAM);
+                        TelefonoINV[count] = new Telefono_Inteligente(Marca2, Modelo2, Precio2, Stock2, Sistemaoperativo, MemoriaRAM);
                         Console.WriteLine($"\n----Telefono Inteligente Registrado Exitosamente----");
 
+                        count++;
                         break;
 
                     default:
                         Console.WriteLine("\n--Error, Seleccione una opcion--");
                         break;
                 }
-                count++;
+
             }
             else
             {
                 Console.WriteLine("\n--El inventario está lleno, no se pueden agregar mas telefonos--");
+                Console.WriteLine("-----------------------------------------------");
+            }
+            int opcSeguimiento = ValidarEntero("\nSeleccione: \n1.Desea volver al menu \n2.salir\n");
+
+            switch (opcSeguimiento)
+            {
+
+                case 1:
+                    Console.WriteLine("--------------------------------------------");
+                    return;
+                case 2:
+                    Console.WriteLine("----Saliendo del programa----");
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    Console.WriteLine("\n--Error, Seleccione una opcion--");
+                    break;
+
             }
         }
-        public static void MostrarTelefonosRegistrados()
-        {
+            public static void MostrarTelefonosRegistrados(){
             if (count == 0)
             {
                 Console.WriteLine("\n--No se han ingresado telefonos--");
@@ -113,7 +143,7 @@ namespace Tienda_Telefonos_Celulares
                 
                 if (telefono != null)
                 {
-                    Console.WriteLine($"---Telefono #{itemTelefono}---");
+                    Console.WriteLine($"---Telefono #{itemTelefono+1}---");
 
                     if (telefono is Telefono_Basicos)
                     {
@@ -124,8 +154,30 @@ namespace Tienda_Telefonos_Celulares
                         ((Telefono_Inteligente)telefono).MostrarInformacionInteligente();
                         Console.WriteLine();
                     }
+
                     itemTelefono++;
                 }
+            }
+            Console.WriteLine($"En total: {itemTelefono}");
+            Console.WriteLine($"--------------------------------------------");
+
+            int opcSeguimiento= ValidarEntero("\nSeleccione: \n1.Desea volver al menu \n2.salir\n");
+            
+            switch( opcSeguimiento)
+            {
+               
+                case 1: 
+                    Console.WriteLine("--------------------------------------------");
+                return;
+                case 2:
+                    Console.WriteLine("----Saliendo del programa----");
+                    Environment.Exit(0);
+                break;
+
+                default:
+                    Console.WriteLine("\n--Error, Seleccione una opcion--");
+                    break;
+                
             }
         }
         public static void ConsultarStockDeUnTelefono()
@@ -146,6 +198,7 @@ namespace Tienda_Telefonos_Celulares
                  if (telefono != null && telefono.Modelo.Equals(modeloAencontrar, StringComparison.OrdinalIgnoreCase))
                  {
                         Console.WriteLine($"\n--Telefono encontrado-- \nModelo: {telefono.Modelo}, Stock: {telefono.Stock}");
+                    Console.WriteLine("\n--------------------------------------------");
                         encontrado = true;
                         break;
                  }
@@ -155,8 +208,25 @@ namespace Tienda_Telefonos_Celulares
              {
                     Console.WriteLine("--No se encontro el telefono--");
              }
+            int opcSeguimiento = ValidarEntero("\nSeleccione: \n1.Desea volver al menu \n2.salir\n");
+
+            switch (opcSeguimiento)
+            {
+
+                case 1:
+                    Console.WriteLine("--------------------------------------------");
+                    return;
+                case 2:
+                    Console.WriteLine("----Saliendo del programa----");
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    Console.WriteLine("\n--Error, Seleccione una opcion--");
+                    break;
+            }
         }
-        public static int ValidarEntero(string mensaje)
+            public static int ValidarEntero(string mensaje)
         {
             while (true)
             {
@@ -165,7 +235,7 @@ namespace Tienda_Telefonos_Celulares
 
                 if (string.IsNullOrWhiteSpace(entrada))
                 {
-                    Console.WriteLine("Error: ¡Digite un valor!");
+                    Console.WriteLine("\nError: ¡Digite un valor!");
                     continue;
                 }
                 else if (int.TryParse(entrada, out int valor))
@@ -174,7 +244,7 @@ namespace Tienda_Telefonos_Celulares
                 }
                 else
                 {
-                    Console.WriteLine("Error: ¡Por favor, Digite un entero!");
+                    Console.WriteLine("\nError: ¡Por favor, Digite un entero!");
                 }
             }
         }
@@ -187,7 +257,7 @@ namespace Tienda_Telefonos_Celulares
 
                 if (string.IsNullOrWhiteSpace(entrada))
                 {
-                    Console.WriteLine("--Error: Ingrese si o no--");
+                    Console.WriteLine("\n--Error: Ingrese si o no--");
                     continue;
                 }
                 else if (entrada== "si")
